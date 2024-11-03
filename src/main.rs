@@ -1,3 +1,5 @@
+// TODO: Remove redundant comments and replace repitive code with something like switch statements
+
 use std::io;
 use rand::{thread_rng, Rng};
 
@@ -34,7 +36,7 @@ fn generate_password(length: usize, use_uppercase: bool, use_numbers: bool, use_
         password.push(chars.chars().nth(index).unwrap());
     }
 
-    return password; // Return the generated password
+    return password;
 }
 
 // Function to gather user preferences for password generation
@@ -69,6 +71,5 @@ fn main() {
     // Generate the password based on user preferences
     let password = generate_password(length, use_uppercase, use_numbers, use_symbols);
     
-    // Print the generated password
     println!("Generated password: {}", password);
 }
