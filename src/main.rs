@@ -1,20 +1,24 @@
-// TODO: Remove redundant comments and replace repitive code with something like switch statements
+// TODO: replace repitive code with something like match statements
 
-use std::io;
 use rand::{thread_rng, Rng};
+use std::io;
 
-// Define constants for different character sets
+// Constants to be used in the password
 const LOWERCASE: &str = "abcdefghijklmnopqrstuvwxyz";
 const UPPERCASE: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const NUMBERS: &str = "0123456789";
 const SYMBOLS: &str = "!@#$%^&*()_-+=<>?";
 
-// Function to generate a password based on user preferences
-fn generate_password(length: usize, use_uppercase: bool, use_numbers: bool, use_symbols: bool) -> String {
+fn generate_password(
+    length: usize,
+    use_uppercase: bool,
+    use_numbers: bool,
+    use_symbols: bool,
+) -> String {
     // Start with lowercase characters
     let mut chars = LOWERCASE.to_string();
-    
-    // Add uppercase, numbers, and symbols based on user preferences
+
+    // Then add uppercase, numbers, and symbols based on user preferences
     if use_uppercase {
         chars.push_str(UPPERCASE);
     }
@@ -39,8 +43,8 @@ fn generate_password(length: usize, use_uppercase: bool, use_numbers: bool, use_
     return password;
 }
 
-// Function to gather user preferences for password generation
 fn get_password_preferences() -> (usize, bool, bool, bool) {
+    // Start asking the user's preferences
     println!("Enter password length:");
     let mut length = String::new();
     io::stdin().read_line(&mut length).unwrap();
@@ -61,15 +65,16 @@ fn get_password_preferences() -> (usize, bool, bool, bool) {
     io::stdin().read_line(&mut symbols).unwrap();
     let use_symbols = symbols.trim().eq_ignore_ascii_case("y");
 
-    (length, use_uppercase, use_numbers, use_symbols) // Return user preferences as a tuple
+    // Return this as a tuple which will then be passed into generate_password()
+    (length, use_uppercase, use_numbers, use_symbols)
 }
 
 fn main() {
     // Get user preferences for password generation
     let (length, use_uppercase, use_numbers, use_symbols) = get_password_preferences();
-    
+
     // Generate the password based on user preferences
     let password = generate_password(length, use_uppercase, use_numbers, use_symbols);
-    
+
     println!("Generated password: {}", password);
 }
