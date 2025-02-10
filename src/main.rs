@@ -36,6 +36,10 @@ pub fn generate_password(config: &PasswordConfig) -> String {
         .collect()
 }
 
+fn main() {
+    println!("PasswordGenerator 0.2.0");
+}
+
 // TODO: add more tests
 #[cfg(test)]
 mod tests {
@@ -55,6 +59,7 @@ mod tests {
 }
 
 // Decouple CLI functionality into seperate module here
+// TODO: add stricter user input, e.g accept y/n only instead of any character
 #[cfg(feature = "cli")]
 mod cli {
     use super::*;
