@@ -9,23 +9,25 @@ const UPPERCASE: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const NUMBERS: &str = "0123456789";
 const SYMBOLS: &str = "!@#$%^&*()_-+=<>?";
 
-fn generate_password(
-    length: usize,
-    use_uppercase: bool,
-    use_numbers: bool,
-    use_symbols: bool,
-) -> String {
+pub struct PasswordConfig {
+    pub length: usize,
+    pub use_uppercase: bool,
+    pub use_numbers: bool,
+    pub use_symbols: bool,
+}
+
+fn generate_password(config: &PasswordConfig) -> String {
     // Start with lowercase characters
     let mut chars = LOWERCASE.to_string();
 
     // Then add uppercase, numbers, and symbols based on user preferences
-    if use_uppercase {
+    if config.use_uppercase {
         chars.push_str(UPPERCASE);
     }
-    if use_numbers {
+    if config.use_numbers {
         chars.push_str(NUMBERS);
     }
-    if use_symbols {
+    if config.use_symbols {
         chars.push_str(SYMBOLS);
     }
 
@@ -33,7 +35,7 @@ fn generate_password(
     let mut password = String::new(); // Create an empty String to hold the password
 
     // Iterate to generate the specified length of password
-    for _ in 0..length {
+    for _ in 0..config.length {
         // Generate a random index to pick a character
         let index = rng.gen_range(0..chars.len());
         // Get the character at the random index and append it to the password
@@ -71,10 +73,10 @@ fn get_password_preferences() -> (usize, bool, bool, bool) {
 
 fn main() {
     // Get user preferences for password generation
-    let (length, use_uppercase, use_numbers, use_symbols) = get_password_preferences();
+    //let (length, use_uppercase, use_numbers, use_symbols) = get_password_preferences();
 
     // Generate the password based on user preferences
-    let password = generate_password(length, use_uppercase, use_numbers, use_symbols);
+    //let password = generate_password(PasswordConfig);
 
-    println!("Generated password: {}", password);
+    //println!("Generated password: {}", password);
 }
